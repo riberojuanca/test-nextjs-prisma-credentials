@@ -9,8 +9,25 @@ function RegisterPage() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
+  const onSubmit = handleSubmit(async (data) => {
+    if (data.password !== data.confirmPassword) {
+      return alert("Passwords do not match");
+    }
+
+    const res = await fetch("/api/auth/register", {
+      method: "POST",
+      body: JSON.stringify({
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const resJSON = await res.json();
+    console.log(resJSON);
   });
 
   return (

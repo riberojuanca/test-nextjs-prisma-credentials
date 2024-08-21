@@ -13,6 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+//Creamos nuestra tabla
 model User {
   id Int @id @default(autoincrement())
   email String @unique
